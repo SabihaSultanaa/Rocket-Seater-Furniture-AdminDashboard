@@ -14,6 +14,8 @@ import {
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import toast from "react-hot-toast"
 
 interface ICart{
   name: string
@@ -23,7 +25,7 @@ interface ICart{
 }
 
 export default function CheckoutForm() {
-  
+  const route =useRouter()
   const [cartItem, setCartItem] = useState<ICart[]>([])
   const [shipCost, setShipCost] = useState(0)
 
@@ -40,17 +42,19 @@ export default function CheckoutForm() {
   },[])
   
 
-  function handlePayment(){
-    alert("Payment successfully ✅")
-    
-    localStorage.setItem("cart", JSON.stringify([]))
-    setCartItem([])
-  }
+  
 
  const totalAmount = Number(cartItem.reduce((acc: number, item: ICart) => acc + Number(item.price * item.quantity), 0)) + Number(shipCost ? shipCost : 0)
 
 
-
+ function handlePayment(){
+  if(true){
+route.push(`/payment?amount=${totalAmount}`)
+  }
+  else{
+   toast.error("Something went wrong")
+  }
+ }
 
 
 
