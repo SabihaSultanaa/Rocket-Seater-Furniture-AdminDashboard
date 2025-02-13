@@ -234,7 +234,7 @@ route.push(`/payment?amount=${totalAmount}`)
               
               onClick={handlePayment}
               >
-                Place order
+               Lets Pay
               </Button>
            
             </div>
